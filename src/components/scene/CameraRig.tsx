@@ -13,7 +13,9 @@ import {
   Raycaster,
   Vector3,
 } from 'three';
+import { isTextEntryTarget } from '@/lib/keyboard';
 import { useLabStore } from '@/store/lab-store';
+import { useTutorStore } from '@/store/tutor-store';
 
 type CameraRigProps = {
   playerRef: MutableRefObject<Group | null>;
@@ -59,9 +61,15 @@ export function CameraRig({ playerRef, headingRef }: CameraRigProps) {
 
     const handleViewToggle = (event: KeyboardEvent) => {
       if (event.code !== 'KeyV' || event.repeat) return;
-      if (useLabStore.getState().gamePhase === 'playing' && !useLabStore.getState().isPaused) {
-        useLabStore.getState().toggleTacticalView();
-      }
+      const lab = useLabStore.getState();
+      if (
+        isTextEntryTarget(event.target)
+        || useTutorStore.getState().isOpen
+        || lab.activeStation
+        || lab.gamePhase !== 'playing'
+        || lab.isPaused
+      ) return;
+      lab.toggleTacticalView();
     };
 
     window.addEventListener('wheel', handleWheel, { passive: true });

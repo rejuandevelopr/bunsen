@@ -5,6 +5,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { Group, MathUtils, Quaternion, Vector3 } from 'three';
 import { CHARACTER_ANIMATIONS, StudentPlayerModel } from '@/components/models/Characters';
 import { gameAudio } from '@/lib/audio';
+import { isTextEntryTarget } from '@/lib/keyboard';
 import { derivePlayerMotion } from '@/lib/player-motion';
 import { RESEARCHER_PLAYER_CLEARANCE } from '@/lib/researchers';
 import { RESEARCHERS } from '@/lib/researchers';
@@ -46,8 +47,23 @@ export function PlayerExperience({ assistantRef, researcherRefs }: PlayerExperie
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      pressedKeys.current.add(event.code);
+      const typing = isTextEntryTarget(event.target);
+      if (!typing) pressedKeys.current.add(event.code);
       if (event.repeat) return;
+      if (event.code === 'Escape') {
+        const lab = useLabStore.getState();
+        const tutor = useTutorStore.getState();
+        if (tutor.isOpen) {
+          tutor.closeChat();
+        } else if (lab.activeStation) {
+          lab.closeStation();
+        } else if (lab.gamePhase === 'playing') {
+          if (lab.isPaused) lab.closePause();
+          else lab.openPause();
+        }
+        return;
+      }
+      if (typing) return;
       const currentPlayer = playerRef.current;
       if (!currentPlayer) return;
       if (
@@ -71,18 +87,6 @@ export function PlayerExperience({ assistantRef, researcherRefs }: PlayerExperie
           });
         } else {
           useLabStore.getState().activateNearbyStation(currentPlayer.position.x, currentPlayer.position.z);
-        }
-      }
-      if (event.code === 'Escape') {
-        const lab = useLabStore.getState();
-        const tutor = useTutorStore.getState();
-        if (tutor.isOpen) {
-          tutor.closeChat();
-        } else if (lab.activeStation) {
-          lab.closeStation();
-        } else if (lab.gamePhase === 'playing') {
-          if (lab.isPaused) lab.closePause();
-          else lab.openPause();
         }
       }
     };
