@@ -1,0 +1,172 @@
+[
+  {
+    "id": "welcome-to-bunsen",
+    "chapter": 1,
+    "title": "Welcome to Bunsen",
+    "zone": "chemistry",
+    "objectiveText": "Learn how observation and conversation turn a lab into a place of discovery.",
+    "subTasks": [
+      {
+        "id": "meet-quill",
+        "label": "Talk to Professor Quill in the Chemistry Lab",
+        "targetZone": "chemistry",
+        "trigger": { "type": "talked-to-npc", "npcId": "professor-quill", "interaction": "opened" }
+      },
+      {
+        "id": "find-titration",
+        "label": "Find and open the Titration Station in the Chemistry Lab",
+        "targetZone": "chemistry",
+        "trigger": { "type": "station-opened", "stationId": "titration" }
+      },
+      {
+        "id": "finish-titration",
+        "label": "Complete the acid-base titration successfully",
+        "targetZone": "chemistry",
+        "trigger": { "type": "experiment-outcome", "experimentId": "acid-base-titration", "outcomeType": "success" }
+      },
+      {
+        "id": "ask-quill",
+        "label": "Ask Professor Quill one question about your evidence",
+        "targetZone": "chemistry",
+        "trigger": { "type": "talked-to-npc", "npcId": "professor-quill", "interaction": "question" }
+      }
+    ],
+    "unlocks": ["measure-of-things"],
+    "achievementId": "chapter-welcome"
+  },
+  {
+    "id": "measure-of-things",
+    "chapter": 2,
+    "title": "The Measure of Things",
+    "zone": "instrument",
+    "objectiveText": "Discover why careful measurement makes scientific evidence trustworthy.",
+    "subTasks": [
+      {
+        "id": "visit-instrument-hall",
+        "label": "Go to the Instrument Hall",
+        "targetZone": "instrument",
+        "trigger": { "type": "reached-zone", "zoneId": "instrument" }
+      },
+      {
+        "id": "meet-elias",
+        "label": "Talk to Dr. Elias Reed at the Instrument Bench",
+        "targetZone": "instrument",
+        "trigger": { "type": "talked-to-npc", "npcId": "elias-reed", "interaction": "opened" }
+      },
+      {
+        "id": "read-instruments",
+        "label": "Read the Instruments Field Notes in the Instrument Hall",
+        "targetZone": "instrument",
+        "trigger": { "type": "read-material", "materialId": "instruments" }
+      },
+      {
+        "id": "finish-flame-test",
+        "label": "Complete the Flame Test at the Instrument Bench",
+        "targetZone": "instrument",
+        "trigger": { "type": "experiment-outcome", "experimentId": "instrument-flame-test", "outcomeType": "success" }
+      }
+    ],
+    "unlocks": ["eyes-on-the-sky"],
+    "achievementId": "chapter-measure"
+  },
+  {
+    "id": "eyes-on-the-sky",
+    "chapter": 3,
+    "title": "Eyes on the Sky",
+    "zone": "instrument",
+    "objectiveText": "Follow light from the telescope to a new way of thinking about gravity.",
+    "subTasks": [
+      {
+        "id": "meet-mira",
+        "label": "Talk to Dr. Mira Chen near the scopes in the Instrument Hall",
+        "targetZone": "instrument",
+        "trigger": { "type": "talked-to-npc", "npcId": "mira-chen", "interaction": "opened" }
+      },
+      {
+        "id": "read-optics",
+        "label": "Read the Optics Field Notes near the scopes",
+        "targetZone": "instrument",
+        "trigger": { "type": "read-material", "materialId": "optics" }
+      },
+      {
+        "id": "visit-discovery",
+        "label": "Go to the Discovery Room",
+        "targetZone": "discovery",
+        "trigger": { "type": "reached-zone", "zoneId": "discovery" }
+      },
+      {
+        "id": "meet-lena",
+        "label": "Talk to Dr. Lena Ortiz beside the astronaut exhibit",
+        "targetZone": "discovery",
+        "trigger": { "type": "talked-to-npc", "npcId": "lena-ortiz", "interaction": "opened" }
+      },
+      {
+        "id": "finish-gravity",
+        "label": "Complete Gravity on the Moon at the Discovery Exhibit",
+        "targetZone": "discovery",
+        "trigger": { "type": "experiment-outcome", "experimentId": "moon-gravity-bounce", "outcomeType": "success" }
+      }
+    ],
+    "unlocks": ["scholars-path"],
+    "achievementId": "chapter-eyes"
+  },
+  {
+    "id": "scholars-path",
+    "chapter": 4,
+    "title": "The Scholar's Path",
+    "zone": "study",
+    "objectiveText": "Practice turning observations into explanations that other researchers can trust.",
+    "subTasks": [
+      {
+        "id": "meet-amara",
+        "label": "Go to the Study Hall and talk to Dr. Amara Okafor",
+        "targetZone": "study",
+        "trigger": { "type": "talked-to-npc", "npcId": "amara-okafor", "interaction": "opened" }
+      },
+      {
+        "id": "meet-kai",
+        "label": "Talk to Kai Morgan across the Study Hall table",
+        "targetZone": "study",
+        "trigger": { "type": "talked-to-npc", "npcId": "kai-morgan", "interaction": "opened" }
+      },
+      {
+        "id": "read-method",
+        "label": "Read the Scientific Method Field Notes in the Study Hall",
+        "targetZone": "study",
+        "trigger": { "type": "read-material", "materialId": "scientific-method" }
+      }
+    ],
+    "unlocks": ["your-own-question"],
+    "achievementId": "chapter-scholar"
+  },
+  {
+    "id": "your-own-question",
+    "chapter": 5,
+    "title": "Your Own Question",
+    "zone": "study",
+    "objectiveText": "Turn something you genuinely wonder about into evidence you can investigate.",
+    "subTasks": [
+      {
+        "id": "open-research-desk",
+        "label": "Go to the Research Desk in the Study Hall",
+        "targetZone": "study",
+        "trigger": { "type": "station-opened", "stationId": "research" }
+      },
+      {
+        "id": "generate-investigation",
+        "label": "Generate an experiment from your own science question",
+        "targetZone": "study",
+        "trigger": { "type": "experiment-generated" }
+      },
+      {
+        "id": "complete-investigation",
+        "label": "Go to the Experiment Bench and complete your generated experiment",
+        "targetZone": "chemistry",
+        "trigger": { "type": "experiment-outcome", "experimentId": "generated", "outcomeType": "success" }
+      }
+    ],
+    "unlocks": [],
+    "achievementId": "chapter-researcher",
+    "completionMessage": "You're a Bunsen researcher now."
+  }
+]

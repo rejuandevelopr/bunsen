@@ -1,0 +1,117 @@
+{
+  "id": "instrument-flame-test",
+  "title": "Flame Test",
+  "question": "Why do different metal ions make different flame colors?",
+  "objective": "Identify a metal sample by observing and recording its flame color",
+  "summary": "Heating a metal ion excites its electrons. As the electrons return to lower energy levels, they emit characteristic wavelengths of visible light.",
+  "station": "experiment-bench",
+  "ageRange": "Ages 11-16",
+  "estimatedMinutes": 6,
+  "equipment": ["bunsenBurner", "scienceTubes", "testTube", "workbench"],
+  "steps": [
+    {
+      "id": "prepare-flame",
+      "title": "Prepare the flame",
+      "prompt": "Begin by making the burner ready before introducing a sample.",
+      "actions": [
+        { "id": "light-burner", "label": "Light the Bunsen burner", "description": "Open the simulated gas control and ignite a steady flame.", "equipmentRef": "bunsenBurner", "effectKey": "flash" },
+        { "id": "record-before-testing", "label": "Record a result now", "description": "Write down a flame color before heating or observing any sample.", "equipmentRef": "workbench", "effectKey": "flash" }
+      ],
+      "correctActionId": "light-burner"
+    },
+    {
+      "id": "choose-sample",
+      "title": "Choose a sample",
+      "prompt": "Select one metal-ion sample and place it in the simulated flame.",
+      "actions": [
+        { "id": "choose-sodium", "label": "Test sodium", "description": "Introduce the sodium sample to the burner flame.", "equipmentRef": "scienceTubes", "effectKey": "color-shift" },
+        { "id": "choose-copper", "label": "Test copper", "description": "Introduce the copper sample to the burner flame.", "equipmentRef": "scienceTubes", "effectKey": "color-shift" },
+        { "id": "choose-potassium", "label": "Test potassium", "description": "Introduce the potassium sample to the burner flame.", "equipmentRef": "scienceTubes", "effectKey": "color-shift" }
+      ],
+      "correctActionId": "choose-sodium",
+      "correctActionIds": ["choose-sodium", "choose-copper", "choose-potassium"]
+    },
+    {
+      "id": "observe-flame",
+      "title": "Observe the flame",
+      "prompt": "Look closely at the flame and compare its new color with the untested flame.",
+      "actions": [
+        { "id": "observe-color", "label": "Observe the color", "description": "Pause and describe the hue produced by the selected metal ion.", "equipmentRef": "bunsenBurner", "effectKey": "glow" },
+        { "id": "look-away", "label": "Skip the observation", "description": "Remove the sample without looking at the flame color.", "equipmentRef": "bunsenBurner", "effectKey": "flash" }
+      ],
+      "correctActionId": "observe-color"
+    },
+    {
+      "id": "record-flame",
+      "title": "Record the result",
+      "prompt": "Choose the record that treats your direct observation as evidence.",
+      "actions": [
+        { "id": "record-observed-color", "label": "Record the observed color", "description": "Write the sample name and the exact flame color you just observed.", "equipmentRef": "workbench", "effectKey": "glow" },
+        { "id": "record-guessed-color", "label": "Record a guessed color", "description": "Ignore the observation and copy a color from memory.", "equipmentRef": "workbench", "effectKey": "flash" }
+      ],
+      "correctActionId": "record-observed-color"
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "observation-first",
+      "type": "surprise",
+      "atStepId": "prepare-flame",
+      "firedByActionId": "record-before-testing",
+      "title": "Science needs observation first",
+      "message": "There is no flame evidence to record yet; a careful observation must come first.",
+      "explanation": "Scientific records are useful when they describe evidence that was actually observed under known conditions.",
+      "effectKey": "flash"
+    },
+    {
+      "id": "sodium-color",
+      "type": "success",
+      "atStepId": "choose-sample",
+      "firedByActionId": "choose-sodium",
+      "title": "Orange-yellow flame",
+      "message": "The flame shifts to sodium's intense orange-yellow color.",
+      "explanation": "Excited sodium ions emit especially strong yellow-orange light near 589 nanometers.",
+      "effectKey": "color-shift"
+    },
+    {
+      "id": "copper-color",
+      "type": "success",
+      "atStepId": "choose-sample",
+      "firedByActionId": "choose-copper",
+      "title": "Green-blue flame",
+      "message": "The flame shifts to a vivid green-blue color from the copper sample.",
+      "explanation": "Copper compounds can emit blue-green light as excited electrons release specific packets of energy.",
+      "effectKey": "color-shift"
+    },
+    {
+      "id": "potassium-color",
+      "type": "success",
+      "atStepId": "choose-sample",
+      "firedByActionId": "choose-potassium",
+      "title": "Lilac flame",
+      "message": "The flame shifts to potassium's pale lilac color.",
+      "explanation": "Potassium's electron transitions include visible violet wavelengths, producing a lilac flame.",
+      "effectKey": "color-shift"
+    },
+    {
+      "id": "missed-evidence",
+      "type": "failure",
+      "atStepId": "observe-flame",
+      "firedByActionId": "look-away",
+      "title": "Evidence missed",
+      "message": "The sample was removed before its flame color was observed.",
+      "explanation": "A result cannot support a conclusion unless the relevant change is observed and described.",
+      "effectKey": "flash"
+    },
+    {
+      "id": "flame-recorded",
+      "type": "success",
+      "atStepId": "record-flame",
+      "firedByActionId": "record-observed-color",
+      "title": "Spectral clue recorded",
+      "message": "Your record links a metal sample to the flame color you directly observed.",
+      "explanation": "Metal ions color flames because their electrons release element-specific energies as light when returning to lower energy levels.",
+      "effectKey": "glow"
+    }
+  ]
+}

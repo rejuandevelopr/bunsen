@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  overflow: hidden;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+::selection {
+  background: var(--trim);
+  color: var(--background);
+}
+
+.title-screen {
+  animation: title-reveal 420ms ease-out both;
+}
+
+.title-lockup {
+  animation: title-lockup 620ms 80ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+
+.begin-button:hover,
+.begin-button:focus-visible {
+  color: var(--background) !important;
+  background: var(--trim) !important;
+  box-shadow: 0 0 28px color-mix(in srgb, var(--trim) 70%, transparent);
+  outline: none;
+}
+
+.flask-logo {
+  position: relative;
+  width: 78px;
+  height: 94px;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--glass) 65%, transparent));
+}
+
+.flask-neck {
+  position: absolute;
+  left: 31px;
+  top: 0;
+  width: 18px;
+  height: 38px;
+  border: 3px solid var(--paper);
+  border-bottom: 0;
+}
+
+.flask-body {
+  position: absolute;
+  inset: 28px 5px 0;
+  overflow: hidden;
+  background: var(--paper);
+  clip-path: polygon(36% 0, 64% 0, 64% 20%, 96% 82%, 92% 96%, 8% 96%, 4% 82%, 36% 20%);
+}
+
+.flask-body::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: var(--background);
+  clip-path: inherit;
+}
+
+.flask-liquid {
+  position: absolute;
+  z-index: 1;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  height: 34px;
+  background: var(--glass);
+  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+}
+
+.objective-enter {
+  animation: objective-slide 700ms 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.controls-enter {
+  animation: controls-fade 700ms 1350ms ease-out both;
+}
+
+.intro-skip {
+  animation: controls-fade 500ms 300ms ease-out both;
+}
+
+.zone-label {
+  animation: zone-arrive 2600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.station-prompt {
+  animation: station-prompt 360ms ease-out both;
+}
+
+.station-panel {
+  animation: station-panel-enter 250ms cubic-bezier(0.2, 0.78, 0.2, 1) both;
+  scrollbar-color: var(--trim) transparent;
+  scrollbar-width: thin;
+}
+
+.loading-flask {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  color: var(--glass);
+  font-size: 1.5rem;
+  animation: loading-flask 1.2s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px var(--glass));
+}
+
+.stream-caret {
+  color: var(--glass);
+  animation: stream-caret 720ms steps(1) infinite;
+}
+
+.professor-bubble {
+  animation: professor-bubble 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.quest-objective-highlight {
+  animation: quest-objective-highlight 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.quest-map-target {
+  animation: quest-map-pulse 1.5s ease-in-out infinite;
+}
+
+.quest-toast {
+  animation: quest-toast 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.achievement-pop {
+  animation: achievement-pop 520ms cubic-bezier(0.2, 1.35, 0.3, 1) both;
+}
+
+.pause-menu-enter {
+  animation: pause-menu-enter 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes title-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes title-lockup {
+  from { opacity: 1; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes objective-slide {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes controls-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zone-arrive {
+  0% { opacity: 0; transform: translate(-50%, -8px); }
+  16%, 68% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 0); }
+}
+
+@keyframes station-prompt {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes station-panel-enter {
+  from { opacity: 0; transform: translate(42px, -50%); }
+  to { opacity: 1; transform: translate(0, -50%); }
+}
+
+@keyframes loading-flask {
+  0%, 100% { transform: rotate(-5deg) translateY(1px); opacity: 0.7; }
+  50% { transform: rotate(6deg) translateY(-3px); opacity: 1; }
+}
+
+@keyframes stream-caret {
+  0%, 48% { opacity: 1; }
+  49%, 100% { opacity: 0; }
+}
+
+@keyframes professor-bubble {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes quest-objective-highlight {
+  0% { transform: scale(1); box-shadow: 0 18px 60px color-mix(in srgb, var(--background) 72%, transparent); }
+  38% { transform: scale(1.025); box-shadow: 0 0 34px color-mix(in srgb, var(--glass) 72%, transparent); }
+  100% { transform: scale(1); }
+}
+
+@keyframes quest-map-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+@keyframes quest-toast {
+  from { opacity: 0; transform: translateY(-10px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes achievement-pop {
+  0% { transform: scale(0.65) rotate(-8deg); }
+  65% { transform: scale(1.18) rotate(3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes pause-menu-enter {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-screen,
+  .title-lockup,
+  .objective-enter,
+  .controls-enter,
+  .intro-skip,
+  .zone-label,
+  .station-prompt,
+  .station-panel {
+    animation-duration: 1ms;
+    animation-delay: 0ms;
+  }
+  .quest-objective-highlight,
+  .quest-map-target,
+  .quest-toast,
+  .achievement-pop,
+  .pause-menu-enter {
+    animation-duration: 1ms;
+  }
+}

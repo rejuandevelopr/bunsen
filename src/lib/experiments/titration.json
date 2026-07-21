@@ -1,0 +1,86 @@
+{
+  "id": "acid-base-titration",
+  "title": "Acid-Base Titration",
+  "question": "How can an indicator reveal when an acid has been neutralized?",
+  "objective": "Neutralize the acid without overshooting the endpoint",
+  "summary": "Use an indicator and measured additions of base to find the neutral endpoint of an acid sample.",
+  "station": "experiment-bench",
+  "ageRange": "Ages 12-16",
+  "estimatedMinutes": 10,
+  "equipment": ["flask", "labEquipment", "workbench"],
+  "steps": [
+    {
+      "id": "inspect-sample",
+      "title": "Inspect the sample",
+      "prompt": "Begin by finding a safe way to make the acid-base change visible.",
+      "actions": [
+        { "id": "add-indicator", "label": "Add indicator", "description": "Add two drops of indicator to the acid sample.", "equipmentRef": "flask", "effectKey": "color-shift" },
+        { "id": "heat-sample", "label": "Heat the acid", "description": "Warm the sample before measuring its pH.", "equipmentRef": "labEquipment", "effectKey": "steam" }
+      ],
+      "correctActionId": "add-indicator"
+    },
+    {
+      "id": "prepare-burette",
+      "title": "Prepare the burette",
+      "prompt": "Set up a controlled way to add base while observing the flask.",
+      "actions": [
+        { "id": "fill-burette", "label": "Fill to the mark", "description": "Fill the burette with base and note the starting volume.", "equipmentRef": "labEquipment", "effectKey": null },
+        { "id": "pour-all-base", "label": "Pour from the bottle", "description": "Pour the base directly into the flask in one motion.", "equipmentRef": "flask", "effectKey": "bubbles" }
+      ],
+      "correctActionId": "fill-burette"
+    },
+    {
+      "id": "find-endpoint",
+      "title": "Find the endpoint",
+      "prompt": "Add base while watching for a color that remains after swirling.",
+      "actions": [
+        { "id": "add-dropwise", "label": "Add one drop at a time", "description": "Slow the flow and swirl between drops near the endpoint.", "equipmentRef": "labEquipment", "effectKey": "color-shift" },
+        { "id": "overshoot-endpoint", "label": "Open the stopcock fully", "description": "Let a large amount of base rush into the flask.", "equipmentRef": "labEquipment", "effectKey": "bubbles" },
+        { "id": "stop-too-early", "label": "Stop before color holds", "description": "Stop while the indicator color still vanishes after swirling.", "equipmentRef": "flask", "effectKey": "color-shift" }
+      ],
+      "correctActionId": "add-dropwise"
+    },
+    {
+      "id": "record-result",
+      "title": "Record the result",
+      "prompt": "Choose the observation that best supports a neutral endpoint.",
+      "actions": [
+        { "id": "record-persistent-color", "label": "Record the lasting pale color", "description": "Record the final volume and the faint color that persists after swirling.", "equipmentRef": "workbench", "effectKey": "glow" },
+        { "id": "record-dark-color", "label": "Record the darkest color", "description": "Choose the darkest color as the endpoint regardless of volume.", "equipmentRef": "workbench", "effectKey": "color-shift" }
+      ],
+      "correctActionId": "record-persistent-color"
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "indicator-bloom",
+      "type": "surprise",
+      "atStepId": "inspect-sample",
+      "firedByActionId": "add-indicator",
+      "title": "A color appears",
+      "message": "The clear sample flashes pink, then settles back as it mixes.",
+      "explanation": "Indicator molecules change structure with pH, which changes the wavelengths of light they absorb.",
+      "effectKey": "color-shift"
+    },
+    {
+      "id": "titration-overshoot",
+      "type": "failure",
+      "atStepId": "find-endpoint",
+      "firedByActionId": "overshoot-endpoint",
+      "title": "Endpoint overshot",
+      "message": "The flask turns a strong, lasting color: too much base was added.",
+      "explanation": "Past the equivalence region, excess hydroxide controls the pH. The trial can be repeated with smaller additions; failures are data.",
+      "effectKey": "color-shift"
+    },
+    {
+      "id": "neutralized",
+      "type": "success",
+      "atStepId": "record-result",
+      "firedByActionId": "record-persistent-color",
+      "title": "Endpoint recorded",
+      "message": "Your measured addition produced a faint color that persists after swirling.",
+      "explanation": "A persistent indicator change near the expected endpoint provides evidence that acid and base reacted in equivalent amounts.",
+      "effectKey": "glow"
+    }
+  ]
+}

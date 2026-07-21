@@ -1,0 +1,85 @@
+{
+  "id": "ice-density-discovery",
+  "title": "The Floating Ice Mystery",
+  "question": "Why does ice float?",
+  "objective": "Discover how freezing changes water's density",
+  "summary": "Compare equal amounts of liquid water and ice, then use particle spacing to explain why solid water floats.",
+  "station": "experiment-bench",
+  "ageRange": "Ages 10-15",
+  "estimatedMinutes": 8,
+  "equipment": ["flask", "labEquipment", "workbench"],
+  "steps": [
+    {
+      "id": "predict-behavior",
+      "title": "Make a prediction",
+      "prompt": "Choose a prediction before placing an ice cube into liquid water.",
+      "actions": [
+        { "id": "predict-float", "label": "Predict it will float", "description": "Predict that the ice cube will stay near the water surface.", "equipmentRef": "flask", "effectKey": null },
+        { "id": "predict-sink", "label": "Predict it will sink", "description": "Predict that the ice cube will fall to the bottom.", "equipmentRef": "flask", "effectKey": null }
+      ],
+      "correctActionId": "predict-float"
+    },
+    {
+      "id": "test-ice",
+      "title": "Test the cube",
+      "prompt": "Place the ice gently into water and observe where it settles.",
+      "actions": [
+        { "id": "lower-ice-gently", "label": "Lower the ice gently", "description": "Set the cube on the water without pushing it below the surface.", "equipmentRef": "flask", "effectKey": "float" },
+        { "id": "force-ice-down", "label": "Hold it underwater", "description": "Push the cube down and keep it below the surface.", "equipmentRef": "labEquipment", "effectKey": "sink" }
+      ],
+      "correctActionId": "lower-ice-gently"
+    },
+    {
+      "id": "compare-volume",
+      "title": "Compare equal masses",
+      "prompt": "Compare the volume occupied by equal masses of liquid water and ice.",
+      "actions": [
+        { "id": "compare-equal-masses", "label": "Compare equal masses", "description": "Use equal masses and note that the ice occupies more space.", "equipmentRef": "labEquipment", "effectKey": "glow" },
+        { "id": "compare-unequal-samples", "label": "Compare random amounts", "description": "Use different masses and compare their visible sizes.", "equipmentRef": "workbench", "effectKey": null }
+      ],
+      "correctActionId": "compare-equal-masses"
+    },
+    {
+      "id": "explain-density",
+      "title": "Build the explanation",
+      "prompt": "Choose the particle model that explains the observation.",
+      "actions": [
+        { "id": "choose-open-lattice", "label": "Choose the open lattice", "description": "Connect freezing with a more open hydrogen-bonded structure.", "equipmentRef": "workbench", "effectKey": "sparkle" },
+        { "id": "choose-heavier-molecules", "label": "Choose heavier molecules", "description": "Claim that each water molecule loses mass as it freezes.", "equipmentRef": "workbench", "effectKey": "sink" }
+      ],
+      "correctActionId": "choose-open-lattice"
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "ice-pops-up",
+      "type": "surprise",
+      "atStepId": "test-ice",
+      "firedByActionId": "lower-ice-gently",
+      "title": "The cube rises",
+      "message": "The ice settles with part of the cube above the waterline.",
+      "explanation": "Ice is less dense than liquid water, so buoyancy balances its weight before the cube is fully submerged.",
+      "effectKey": "float"
+    },
+    {
+      "id": "forced-observation",
+      "type": "failure",
+      "atStepId": "test-ice",
+      "firedByActionId": "force-ice-down",
+      "title": "The test is constrained",
+      "message": "Holding the cube down prevents it from showing its natural position.",
+      "explanation": "Your hand adds an external downward force, so this setup cannot reveal whether the ice would float freely. Failures are data: remove the extra force and retry.",
+      "effectKey": "sink"
+    },
+    {
+      "id": "density-explained",
+      "type": "success",
+      "atStepId": "explain-density",
+      "firedByActionId": "choose-open-lattice",
+      "title": "Mystery solved",
+      "message": "Your evidence links a larger volume at equal mass to a lower density.",
+      "explanation": "Hydrogen bonds hold water molecules in a more open crystal lattice when frozen, increasing volume while mass stays the same, so density decreases.",
+      "effectKey": "sparkle"
+    }
+  ]
+}

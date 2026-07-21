@@ -1,0 +1,95 @@
+{
+  "id": "moon-gravity-bounce",
+  "title": "Gravity on the Moon",
+  "question": "How would the same bouncing ball move on Earth and on the Moon?",
+  "objective": "Use a bounce comparison to explain how weaker lunar gravity changes motion",
+  "summary": "The Moon's surface gravity is about one-sixth of Earth's, so a ball with the same launch can rise higher and remain airborne longer there.",
+  "station": "experiment-bench",
+  "ageRange": "Ages 9-14",
+  "estimatedMinutes": 5,
+  "equipment": ["astronaut", "moonBall"],
+  "steps": [
+    {
+      "id": "predict-bounce",
+      "title": "Make a prediction",
+      "prompt": "Predict what the same upward push would do to a ball under Earth and Moon gravity.",
+      "actions": [
+        { "id": "predict-moon-higher", "label": "Moon bounce is higher", "description": "Predict that the ball rises higher and falls more slowly on the Moon.", "equipmentRef": "moonBall", "effectKey": "float" },
+        { "id": "predict-same-height", "label": "Both bounce the same", "description": "Predict that gravity makes no difference to the bounce path.", "equipmentRef": "moonBall", "effectKey": "glow" }
+      ],
+      "correctActionId": "predict-moon-higher"
+    },
+    {
+      "id": "run-comparison",
+      "title": "Run the demonstration",
+      "prompt": "Release the paired balls with the same simulated push and watch both arcs.",
+      "actions": [
+        { "id": "run-bounce-comparison", "label": "Run Earth vs Moon", "description": "Start the paired bounce animation beside the astronaut pedestal.", "equipmentRef": "moonBall", "effectKey": "float" },
+        { "id": "skip-bounce-comparison", "label": "Skip the demonstration", "description": "Move to a conclusion without collecting motion evidence.", "equipmentRef": "astronaut", "effectKey": "flash" }
+      ],
+      "correctActionId": "run-bounce-comparison"
+    },
+    {
+      "id": "record-gravity",
+      "title": "Record the conclusion",
+      "prompt": "Choose the conclusion best supported by the two bounce paths.",
+      "actions": [
+        { "id": "record-one-sixth-gravity", "label": "Record weaker lunar gravity", "description": "Conclude that the Moon's roughly one-sixth gravity allows a higher, slower arc.", "equipmentRef": "moonBall", "effectKey": "sparkle" },
+        { "id": "record-equal-gravity", "label": "Record equal gravity", "description": "Conclude that Earth and Moon pull the ball downward equally.", "equipmentRef": "moonBall", "effectKey": "sink" }
+      ],
+      "correctActionId": "record-one-sixth-gravity"
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "moon-prediction",
+      "type": "success",
+      "atStepId": "predict-bounce",
+      "firedByActionId": "predict-moon-higher",
+      "title": "Testable prediction",
+      "message": "You predicted a higher, slower bounce where gravity is weaker.",
+      "explanation": "A prediction becomes scientific when an observation can support or challenge it.",
+      "effectKey": "float"
+    },
+    {
+      "id": "same-height-surprise",
+      "type": "surprise",
+      "atStepId": "predict-bounce",
+      "firedByActionId": "predict-same-height",
+      "title": "A useful guess to test",
+      "message": "That prediction gives the demonstration something clear to challenge.",
+      "explanation": "Mistaken predictions are useful because comparing them with evidence reveals which variable matters.",
+      "effectKey": "glow"
+    },
+    {
+      "id": "evidence-skipped",
+      "type": "failure",
+      "atStepId": "run-comparison",
+      "firedByActionId": "skip-bounce-comparison",
+      "title": "No bounce evidence yet",
+      "message": "A conclusion needs the Earth and Moon motion comparison first.",
+      "explanation": "Running the same demonstration under two gravitational strengths isolates gravity as the changing variable.",
+      "effectKey": "flash"
+    },
+    {
+      "id": "lunar-gravity-recorded",
+      "type": "success",
+      "atStepId": "record-gravity",
+      "firedByActionId": "record-one-sixth-gravity",
+      "title": "Moon motion explained",
+      "message": "Your conclusion matches the taller, slower lunar bounce.",
+      "explanation": "Surface gravity on the Moon is about one-sixth of Earth's, so the same launch is pulled downward less strongly.",
+      "effectKey": "sparkle"
+    },
+    {
+      "id": "gravity-misread",
+      "type": "failure",
+      "atStepId": "record-gravity",
+      "firedByActionId": "record-equal-gravity",
+      "title": "Compare the arcs again",
+      "message": "The Moon ball stayed aloft longer and rose higher than the Earth ball.",
+      "explanation": "The Moon's gravity is about one-sixth as strong as Earth's at the surface, not equal to it.",
+      "effectKey": "sink"
+    }
+  ]
+}
