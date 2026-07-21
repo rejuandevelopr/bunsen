@@ -111,6 +111,17 @@ canvas {
   scrollbar-width: thin;
 }
 
+.dialogue-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.dialogue-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 .loading-flask {
   display: inline-grid;
   width: 2rem;

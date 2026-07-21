@@ -71,7 +71,11 @@ export function DialoguePanel() {
         </button>
       </div>
 
-      <div ref={scrollRef} className="max-h-52 space-y-3 overflow-y-auto pr-2" aria-live="polite">
+      <div
+        ref={scrollRef}
+        className="dialogue-scroll max-h-52 space-y-3 overflow-y-auto pr-2"
+        aria-live="polite"
+      >
         {messages.map((chatMessage) => (
           <article
             key={chatMessage.id}
